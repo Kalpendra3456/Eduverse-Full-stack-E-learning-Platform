@@ -1,3 +1,6 @@
+# Eduverse-Full-stack-E-learning-Platform
+A full-stack e-learning platform enabling teachers to manage courses and students to track their learning progress.
+
 ## Eduverse – Full‑stack E‑learning Platform
 
 Eduverse is a minimal full‑stack e‑learning platform with **Student** and **Teacher** roles.
