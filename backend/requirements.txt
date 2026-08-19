@@ -1,0 +1,18 @@
+flask==3.0.3
+flask-cors==4.0.1
+flask_sqlalchemy==3.1.1
+mysqlclient==2.2.4
+python-dotenv==1.0.1
+PyJWT==2.9.0
+passlib==1.7.4
+bcrypt==4.0.1
+requests==2.31.0
+google-genai
+# openai-whisper
+setuptools-rust
+pandas --only-binary :all:
+scikit-learn
+# langchain
+# langchain_community
+# transformers
+# torch
