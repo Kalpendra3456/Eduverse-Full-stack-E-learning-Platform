@@ -13,3 +13,5 @@
 
 * **Granted Patent:** AI-integrated Personalized E-Learning System
   * **Application No.:** `202511112259` (Indian Patent)
+  * <img width="1123" height="748" alt="image" src="https://github.com/user-attachments/assets/859516fc-4855-4145-8e26-390918ace9e9" />
+
