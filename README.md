@@ -68,11 +68,13 @@ served via `http://localhost:5000/uploads/<type>/<filename>`.
 
 **How it works:**
 1. Teacher uploads a video → stored locally
-2. Backend extracts audio from video using ffmpeg
-3. Audio is transcribed using OpenAI Whisper API
-4. Transcript is summarized using OpenAI GPT API
-5. Summary is stored in the database
-6. When a student watches the video, a quiz is generated from the summary using GPT API
+2. <img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/04792fa2-0165-42c2-8a20-400be9c7f29d" />
+
+3. Backend extracts audio from video using ffmpeg
+4. Audio is transcribed using OpenAI Whisper API
+5. Transcript is summarized using OpenAI GPT API
+6. Summary is stored in the database
+7. When a student watches the video, a quiz is generated from the summary using GPT API
 
 > **Schema note:** lessons store transcripts, summaries, and quiz history.
 > If you ran an older version, drop & recreate the database (or add the new columns
@@ -107,13 +109,34 @@ Open the URL shown in the terminal (usually `http://localhost:5173`) in your bro
 - **Auth with JWT**: register/login as student or teacher.
 - **Teacher dashboard**:
   - Create courses, upload lesson assets.
+  - <img width="1910" height="938" alt="image" src="https://github.com/user-attachments/assets/b8f746fc-7330-4f89-8dcc-e9ab6e8a1f22" />
+  <img width="1912" height="947" alt="image" src="https://github.com/user-attachments/assets/63f62319-0efe-4a96-a307-db2baddae4a9" />
+
+
   - Videos are uploaded to YouTube automatically using your OAuth credentials (link stored in MySQL).
   - Backend auto-transcribes locally, saves transcripts & AI-style summaries.
   - Real-time stats: enrollment counts and quiz performance averages per course.
 - **Student dashboard**:
+- <img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/2ed45a96-5540-4ab8-99d6-336633a2d48b" />
+
+<img width="1911" height="911" alt="image" src="https://github.com/user-attachments/assets/7dc9343f-c182-4ef3-b143-bfc18956945e" />
+
+
+<img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/bdbb3da0-b1bc-4931-a05f-74065e448412" />
+
+
   - View enrolled courses, embedded videos, downloadable notes, and AI summary text.
+  - <img width="1915" height="957" alt="image" src="https://github.com/user-attachments/assets/ff9755e6-b5ec-4cd1-8869-304b09c3c04c" />
+  <img width="1778" height="748" alt="image" src="https://github.com/user-attachments/assets/4c61865f-9d30-4ce0-bed2-e426f49f5858" />
+
+
+  - 
   - “Watch & generate quiz” creates a fresh quiz every time the video is watched, based on the saved summary.
+  - <img width="1913" height="975" alt="image" src="https://github.com/user-attachments/assets/bc7bb7f5-ba35-4613-9dd6-6e60e5ed185c" />
+
   - Dashboard lists historical quiz attempts (score + date).
+  - <img width="1915" height="957" alt="image" src="https://github.com/user-attachments/assets/4fdfe14e-8aa4-4ed7-9991-50aac1aec817" />
+
 - **MySQL storage**:
   - Users, courses, lessons (with transcripts, summaries, storage paths), enrollments,
     quizzes (with summary snapshot), quiz questions, quiz attempts, quiz answers.
