@@ -1,31 +1,231 @@
-# Eduverse-Full-stack-E-learning-Platform
-A full-stack e-learning platform enabling teachers to manage courses and students to track their learning progress.
+# 🎓 Eduverse – Full-Stack AI E-Learning Platform
 
-## Eduverse – Full‑stack E‑learning Platform
+Eduverse is a full-stack e-learning platform that connects **teachers and students** through course management, video-based learning, AI-generated summaries, and AI-powered quizzes.
 
-Eduverse is a minimal full‑stack e‑learning platform with **Student** and **Teacher** roles.
-It uses **Flask + MySQL (XAMPP)** on the backend and **React (Vite)** on the frontend.
+Teachers can create courses and upload learning materials, while students can watch lessons, access notes and summaries, generate quizzes, and track their quiz performance.
 
-### 1. Prerequisites
+---
 
-- XAMPP with **MySQL** running
-- Python 3.10+
-- Node.js + npm
+## 🚀 Key Features
 
-### 2. Database (MySQL via XAMPP)
+### 👨‍🏫 Teacher
 
-1. Open XAMPP Control Panel and start **MySQL** (and **Apache** if you want phpMyAdmin).
-2. In phpMyAdmin, create a database named **`eduverse`**.
+- Register and login with JWT authentication
+- Create and manage courses
+- Upload lesson videos and notes
+- Automatic video upload to YouTube
+- Automatic audio extraction using FFmpeg
+- AI-powered video transcription using OpenAI Whisper
+- AI-generated lesson summaries
+- View course enrollment statistics
+- Track average quiz performance
 
-### 3. Backend Setup (Flask)
+### 👨‍🎓 Student
 
-From project root:
+- Register and login securely
+- Browse and enroll in courses
+- Watch lesson videos
+- Download lesson notes
+- Read AI-generated summaries
+- Generate quizzes from lesson content
+- Submit quizzes and receive scores
+- View previous quiz attempts and performance history
 
-```bash
-cd backend
+### 🤖 AI Features
+
+- Video → Audio extraction
+- Audio → Text transcription
+- AI-generated lesson summaries
+- AI-generated quizzes from lesson summaries
+- Fresh quiz generation for each attempt
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React, Vite |
+| Backend | Python, Flask |
+| Database | MySQL |
+| Authentication | JWT |
+| AI | OpenAI Whisper, OpenAI GPT |
+| Video Processing | FFmpeg |
+| Video Hosting | YouTube API |
+| Development Environment | XAMPP |
+| API Communication | REST API |
+
+---
+
+## 🏗️ System Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │     React + Vite    │
+                    │      Frontend       │
+                    └──────────┬──────────┘
+                               │
+                               │ REST API
+                               ▼
+                    ┌─────────────────────┐
+                    │      Flask API      │
+                    │      Backend        │
+                    └──────┬─────┬────────┘
+                           │     │
+                ┌──────────┘     └─────────────┐
+                ▼                              ▼
+        ┌───────────────┐              ┌────────────────┐
+        │     MySQL     │              │   OpenAI API   │
+        │   Database    │              │ Whisper + GPT  │
+        └───────────────┘              └───────┬────────┘
+                                               │
+                                               ▼
+                                        AI Summary / Quiz
+
+                           ┌────────────────┐
+                           │     FFmpeg     │
+                           │ Audio Extract  │
+                           └────────────────┘
+
+                           ┌────────────────┐
+                           │   YouTube API  │
+                           │ Video Hosting  │
+                           └────────────────┘
 ```
 
-Create a `.env` file in `backend`:
+---
+
+## 🔄 How It Works
+
+### Teacher Upload Flow
+
+```text
+Teacher uploads video
+        ↓
+Video stored by backend
+        ↓
+FFmpeg extracts audio
+        ↓
+OpenAI Whisper transcribes audio
+        ↓
+GPT generates lesson summary
+        ↓
+Summary stored in MySQL
+        ↓
+Video uploaded to YouTube
+        ↓
+YouTube video ID stored in database
+```
+
+### Student Learning Flow
+
+```text
+Student enrolls in course
+        ↓
+Watches lesson
+        ↓
+Reads notes + AI summary
+        ↓
+Generates quiz
+        ↓
+GPT creates quiz from lesson summary
+        ↓
+Student submits answers
+        ↓
+Score calculated
+        ↓
+Attempt stored in MySQL
+        ↓
+Performance displayed on dashboard
+```
+
+---
+
+## 🗄️ Database Structure
+
+The application uses MySQL to manage users, courses, lessons, enrollments, quizzes, and student performance.
+
+### Main Tables
+
+```text
+users
+courses
+lessons
+enrollments
+quizzes
+quiz_questions
+quiz_attempts
+quiz_answers
+```
+
+Lessons contain:
+
+- Video information
+- Transcripts
+- AI-generated summaries
+- Video storage information
+
+Quiz records contain:
+
+- Quiz questions
+- Summary snapshot
+- Student attempts
+- Answers
+- Scores
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1. Prerequisites
+
+Install the following:
+
+- Python 3.10+
+- Node.js and npm
+- XAMPP
+- FFmpeg
+- OpenAI API Key
+
+---
+
+## 2. Clone Repository
+
+```bash
+git clone https://github.com/your-username/Eduverse-Full-stack-E-learning-Platform.git
+
+cd Eduverse-Full-stack-E-learning-Platform
+```
+
+---
+
+## 3. Database Setup
+
+Open **XAMPP Control Panel** and start:
+
+```text
+MySQL
+```
+
+Start Apache as well if you want to use phpMyAdmin.
+
+Create a database:
+
+```sql
+CREATE DATABASE eduverse;
+```
+
+---
+
+# 🔧 Backend Setup
+
+Navigate to the project root and create the backend environment file:
+
+```text
+backend/.env
+```
+
+Add:
 
 ```env
 FLASK_ENV=development
@@ -35,114 +235,282 @@ DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=eduverse
 DB_USER=root
-DB_PASSWORD=      # leave empty if root has no password
+DB_PASSWORD=
 
 JWT_SECRET_KEY=your_jwt_secret_here
 
-# OpenAI API key for Whisper transcription and GPT-based summary/quiz generation
 OPENAI_API_KEY=your_openai_api_key_here
 
 UPLOAD_FOLDER=uploads
 ```
 
-Install Python dependencies:
+Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
-Run the Flask API (from **project root**, not inside `backend`):
+Run the Flask backend from the **project root**:
 
 ```bash
 python -m backend.app
 ```
 
-The API will be available at `http://localhost:5000/api/...`.
-Uploaded files (videos + notes) are written to `<project>/backend/uploads/...` and
-served via `http://localhost:5000/uploads/<type>/<filename>`.
+Backend API:
 
-**Important Requirements:**
-- **ffmpeg**: Required for audio extraction from videos. Install from https://ffmpeg.org/download.html
-- **OpenAI API Key**: Required for Whisper transcription and AI-powered summary/quiz generation.
-  Get your key from https://platform.openai.com/api-keys
+```text
+http://localhost:5000
+```
 
-**How it works:**
-1. Teacher uploads a video → stored locally
-2. <img width="1873" height="930" alt="image" src="https://github.com/user-attachments/assets/d3561178-d768-439f-93eb-306f04bed8b9" />
-<img width="1917" height="930" alt="image" src="https://github.com/user-attachments/assets/d1a6c90d-7775-4d72-8b68-ce3b45b29f13" />
+---
 
+# 🎨 Frontend Setup
 
-3. <img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/04792fa2-0165-42c2-8a20-400be9c7f29d" />
-
-4. Backend extracts audio from video using ffmpeg
-5. Audio is transcribed using OpenAI Whisper API
-6. Transcript is summarized using OpenAI GPT API
-7. Summary is stored in the database
-8. When a student watches the video, a quiz is generated from the summary using GPT API
-
-> **Schema note:** lessons store transcripts, summaries, and quiz history.
-> If you ran an older version, drop & recreate the database (or add the new columns
-> `summary_text`, `video_storage_path` to `lessons` and `summary_snapshot` to `quizzes`).
-> Remove `youtube_video_id` column from `lessons` if it exists.
-
-### 4. Frontend Setup (React + Vite)
-
-From project root:
+Navigate to the frontend:
 
 ```bash
 cd frontend
+```
+
+Install dependencies:
+
+```bash
 npm install
 ```
 
-Create `frontend/.env` to point to the backend API:
+Create:
+
+```text
+frontend/.env
+```
+
+Add:
 
 ```env
 VITE_API_BASE_URL=http://localhost:5000
 ```
 
-Run the React dev server:
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Open the URL shown in the terminal (usually `http://localhost:5173`) in your browser.
+Frontend will normally run at:
 
-### 5. Core Features (Implemented)
+```text
+http://localhost:5173
+```
 
-- **Auth with JWT**: register/login as student or teacher.
-- **Teacher dashboard**:
-  - Create courses, upload lesson assets.
-  - <img width="1910" height="938" alt="image" src="https://github.com/user-attachments/assets/b8f746fc-7330-4f89-8dcc-e9ab6e8a1f22" />
-  <img width="1912" height="947" alt="image" src="https://github.com/user-attachments/assets/63f62319-0efe-4a96-a307-db2baddae4a9" />
+---
 
+# 🎥 Video Processing
 
-  - Videos are uploaded to YouTube automatically using your OAuth credentials (link stored in MySQL).
-  - Backend auto-transcribes locally, saves transcripts & AI-style summaries.
-  - Real-time stats: enrollment counts and quiz performance averages per course.
-- **Student dashboard**:
-- <img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/2ed45a96-5540-4ab8-99d6-336633a2d48b" />
+Eduverse uses **FFmpeg** to extract audio from uploaded videos.
 
-<img width="1911" height="911" alt="image" src="https://github.com/user-attachments/assets/7dc9343f-c182-4ef3-b143-bfc18956945e" />
+The processing pipeline is:
 
+```text
+Video
+  ↓
+FFmpeg
+  ↓
+Audio
+  ↓
+OpenAI Whisper
+  ↓
+Transcript
+  ↓
+OpenAI GPT
+  ↓
+Summary
+```
 
-<img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/bdbb3da0-b1bc-4931-a05f-74065e448412" />
+Make sure FFmpeg is installed and available in your system PATH.
 
+---
 
-  - View enrolled courses, embedded videos, downloadable notes, and AI summary text.
-  - <img width="1915" height="957" alt="image" src="https://github.com/user-attachments/assets/ff9755e6-b5ec-4cd1-8869-304b09c3c04c" />
-  <img width="1778" height="748" alt="image" src="https://github.com/user-attachments/assets/4c61865f-9d30-4ce0-bed2-e426f49f5858" />
+# 🤖 AI-Powered Learning
 
+Eduverse uses AI to reduce manual work for teachers and improve the student learning experience.
 
-  - 
-  - “Watch & generate quiz” creates a fresh quiz every time the video is watched, based on the saved summary.
-  - <img width="1913" height="975" alt="image" src="https://github.com/user-attachments/assets/bc7bb7f5-ba35-4613-9dd6-6e60e5ed185c" />
+### AI Summary
 
-  - Dashboard lists historical quiz attempts (score + date).
-  - <img width="1915" height="957" alt="image" src="https://github.com/user-attachments/assets/4fdfe14e-8aa4-4ed7-9991-50aac1aec817" />
+A lesson video is transcribed and summarized automatically so students can quickly review the important concepts.
 
-- **MySQL storage**:
-  - Users, courses, lessons (with transcripts, summaries, storage paths), enrollments,
-    quizzes (with summary snapshot), quiz questions, quiz attempts, quiz answers.
+### AI Quiz Generation
 
+The saved lesson summary is provided to the AI model to generate quiz questions.
 
+This allows students to test their understanding without requiring teachers to manually create every quiz.
+
+---
+
+# 🔐 Authentication
+
+The platform uses **JWT-based authentication**.
+
+Users can register and login as:
+
+```text
+Student
+Teacher
+```
+
+Role-based access controls which features and dashboards each user can access.
+
+---
+
+# 📊 Dashboards
+
+### Teacher Dashboard
+
+Teachers can monitor:
+
+- Total courses
+- Course enrollments
+- Quiz performance
+- Lesson content
+- Uploaded learning materials
+
+### Student Dashboard
+
+Students can view:
+
+- Enrolled courses
+- Available lessons
+- Videos
+- Notes
+- AI summaries
+- Quiz scores
+- Previous quiz attempts
+
+---
+
+# 📸 Screenshots
+
+## Teacher Dashboard
+
+Add your screenshots here:
+
+```md
+![Teacher Dashboard](screenshots/teacher-dashboard.png)
+```
+
+## Student Dashboard
+
+```md
+![Student Dashboard](screenshots/student-dashboard.png)
+```
+
+## Course / Lesson Page
+
+```md
+![Lesson Page](screenshots/lesson-page.png)
+```
+
+## AI Quiz
+
+```md
+![AI Quiz](screenshots/ai-quiz.png)
+```
+
+---
+
+# 🔮 Future Improvements
+
+Some planned improvements include:
+
+- 📈 Advanced student performance analytics
+- 🧠 Personalized learning recommendations
+- 💬 AI learning assistant
+- 📚 AI-generated study plans
+- 🎯 Adaptive quizzes based on student performance
+- 🔔 Learning reminders and notifications
+- 🏆 Student achievements and badges
+- 📱 Mobile application
+- ☁️ Cloud-based video storage
+- 🔒 Production-level authentication and security
+- ⚡ Background processing for video transcription
+- 📊 Advanced teacher analytics
+
+---
+
+# 📁 Project Structure
+
+```text
+Eduverse-Full-stack-E-learning-Platform/
+│
+├── backend/
+│   ├── app/
+│   ├── uploads/
+│   ├── requirements.txt
+│   └── .env
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── .env
+│
+├── screenshots/
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
+# ⚠️ Environment Variables
+
+Never commit your API keys or secrets to GitHub.
+
+Make sure `.env` is included in `.gitignore`:
+
+```gitignore
+.env
+backend/.env
+frontend/.env
+__pycache__/
+*.pyc
+node_modules/
+uploads/
+```
+
+---
+
+# 👨‍💻 Developer
+
+**Kalpendra Yadav**
+
+MCA Graduate | Data Analyst | Power BI Developer | Full-Stack Developer
+
+### Skills Used
+
+```text
+React • Python • Flask • MySQL • REST API
+JWT • OpenAI API • FFmpeg • JavaScript
+```
+
+---
+
+## ⭐ Project Highlights
+
+> Eduverse combines **full-stack development, AI, video processing, and data-driven learning** into a single e-learning platform.
+
+The project demonstrates practical implementation of:
+
+- Full-stack web development
+- REST API development
+- Authentication & authorization
+- Relational database design
+- AI API integration
+- Video processing
+- Automated content generation
+- Student performance tracking
+
+---
+
+## 📄 License
+
+This project is developed for educational and portfolio purposes.
