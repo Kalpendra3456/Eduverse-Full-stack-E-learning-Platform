@@ -68,13 +68,17 @@ served via `http://localhost:5000/uploads/<type>/<filename>`.
 
 **How it works:**
 1. Teacher uploads a video → stored locally
-2. <img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/04792fa2-0165-42c2-8a20-400be9c7f29d" />
+2. <img width="1873" height="930" alt="image" src="https://github.com/user-attachments/assets/d3561178-d768-439f-93eb-306f04bed8b9" />
+<img width="1917" height="930" alt="image" src="https://github.com/user-attachments/assets/d1a6c90d-7775-4d72-8b68-ce3b45b29f13" />
 
-3. Backend extracts audio from video using ffmpeg
-4. Audio is transcribed using OpenAI Whisper API
-5. Transcript is summarized using OpenAI GPT API
-6. Summary is stored in the database
-7. When a student watches the video, a quiz is generated from the summary using GPT API
+
+3. <img width="1915" height="971" alt="image" src="https://github.com/user-attachments/assets/04792fa2-0165-42c2-8a20-400be9c7f29d" />
+
+4. Backend extracts audio from video using ffmpeg
+5. Audio is transcribed using OpenAI Whisper API
+6. Transcript is summarized using OpenAI GPT API
+7. Summary is stored in the database
+8. When a student watches the video, a quiz is generated from the summary using GPT API
 
 > **Schema note:** lessons store transcripts, summaries, and quiz history.
 > If you ran an older version, drop & recreate the database (or add the new columns
