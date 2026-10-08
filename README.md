@@ -393,40 +393,36 @@ Students can view:
 
 Add your screenshots here:
 
-```md
+
 <img width="1873" height="930" alt="Screenshot 2026-10-08 163415" src="https://github.com/user-attachments/assets/429506ec-8dd3-49a1-a379-4e3bed54af66" />
 <img width="1917" height="930" alt="Screenshot 2026-10-08 163548" src="https://github.com/user-attachments/assets/493ab71c-3ecc-45be-afae-e5a5ffa81bcc" />
 
 
 <img width="1910" height="938" alt="Screenshot 2026-10-08 160338" src="https://github.com/user-attachments/assets/f73acb2b-f813-4371-ac1e-8b359bbf85de" />
 
-```
+
 
 ## Student Dashboard
 
-```md
 <img width="1915" height="971" alt="Screenshot 2026-10-08 144631" src="https://github.com/user-attachments/assets/e78bc510-4317-4fe5-97f9-f1a1eb01c528" />
-
-```
 
 ## Course / Lesson Page
 
-```md
+
 <img width="1915" height="957" alt="Screenshot 2026-10-08 160209" src="https://github.com/user-attachments/assets/82ca3d54-c119-44e0-88c9-7e7f0b6e7b4c" />
 <img width="1907" height="938" alt="Screenshot 2026-10-08 160546" src="https://github.com/user-attachments/assets/6c4f2cb6-836a-404d-ad54-52e1b1eb5c3d" />
 
 
-```
 
 ## AI Quiz
 
-```md
+
 <img width="1913" height="975" alt="Screenshot 2026-10-08 155935" src="https://github.com/user-attachments/assets/14f2ecea-ff15-47a4-9632-99510701359d" />
 <img width="1915" height="957" alt="Screenshot 2026-10-08 160059" src="https://github.com/user-attachments/assets/48acc50a-2a19-47b0-b360-a226b2b13748" />
 <img width="1778" height="748" alt="Screenshot 2026-10-08 160232" src="https://github.com/user-attachments/assets/f7675e3f-8891-44d0-a904-ce4a5014c9c0" />
 
 
-```
+
 
 ---
 
